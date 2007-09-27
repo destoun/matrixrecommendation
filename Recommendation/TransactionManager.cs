@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using System.IO;
 using log4net;
@@ -12,6 +13,13 @@ namespace Mousourouli.MDE.Recommendation
         Set<int> _DistinctItems;
         private ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+
+        #region Constructors
+        public TransactionManager(string filename)
+            : this(File.Open(filename, FileMode.Open))
+        {
+
+        }
 
         public TransactionManager(Stream stream)
         {
@@ -31,10 +39,7 @@ namespace Mousourouli.MDE.Recommendation
 
         }
 
-        public TransactionManager(string filename):this(File.Open(filename, FileMode.Open))
-        {
-            
-        }
+        #endregion 
 
         public IList<TransactionItem> this[int i]
         {
@@ -61,17 +66,21 @@ namespace Mousourouli.MDE.Recommendation
             List<TransactionItem> transaction = new List<TransactionItem>();
             if (!String.IsNullOrEmpty(line))
             {
-                string[] items = line.Split(' ', '\t');
+                string[] items = line.Trim().Split(' ', '\t');
                 int itemValue;
                 foreach (string item in items)
                 {
+                    string timmedItem = item.Trim();
+                    if (timmedItem.Length == 0)
+                        continue;
 
                     try
                     {
-                        itemValue = Convert.ToInt32(item);
+                        itemValue = Convert.ToInt32(timmedItem);
                     }
                     catch (Exception ex)
                     {
+                        //log.Debug("'" + item + "'");
                         log.Error(ex);
                         throw ex;
                     }
@@ -110,10 +119,7 @@ namespace Mousourouli.MDE.Recommendation
 
         }
 
-
-
-
-
+        
         #region IEnumerable<IList<TransactionItem>> Members
 
         public IEnumerator<IList<TransactionItem>> GetEnumerator()

@@ -12,7 +12,7 @@ namespace Mousourouli.MDE.Tests
     public class TransactionManagerTests
     {
         static readonly string TestData =
-@"1 3 6 73 39 308
+@"1 3 6 73 39 308  
 3 38 29 2 20
 2 -1 33 3
 ";
