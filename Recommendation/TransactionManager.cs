@@ -6,29 +6,55 @@ using log4net;
 
 namespace Mousourouli.MDE.Recommendation
 {
-    class TransactionManager
+    public class TransactionManager: IEnumerable<IList<TransactionItem>>   
     {
-        IList<IList<TransactionItem>> Transactions;
-        Set<int> DistinctItems;
+        IList<IList<TransactionItem>> _Transactions;
+        Set<int> _DistinctItems;
         private ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public TransactionManager(string filename)
-        {
-            Transactions = new List<IList<TransactionItem>>();
-            DistinctItems = new Set<int>();
 
-            using (StreamReader sr = new StreamReader(filename))
+        public TransactionManager(Stream stream)
+        {
+            _Transactions = new List<IList<TransactionItem>>();
+            _DistinctItems = new Set<int>();
+
+            using (StreamReader sr = new StreamReader(stream))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     IList<TransactionItem> transaction = CreateTransaction(line);
-                    Transactions.Add(transaction);
-                    
+                    _Transactions.Add(transaction);
+
                 }
             }
 
         }
+
+        public TransactionManager(string filename):this(File.Open(filename, FileMode.Open))
+        {
+            
+        }
+
+        public IList<TransactionItem> this[int i]
+        {
+            get
+            {
+                return _Transactions[i];
+            }
+
+        }
+
+        public int Count
+        {
+            get
+            {
+                return _Transactions.Count;
+            }
+        }
+
+
+        
 
         IList<TransactionItem> CreateTransaction(string line)
         {
@@ -52,7 +78,7 @@ namespace Mousourouli.MDE.Recommendation
 
                     TransactionItem ti = new TransactionItem(Math.Abs(itemValue), (itemValue >= 0) ? true : false);
                     //TODO: find if item exists
-                    DistinctItems.Add(ti.Item);
+                    _DistinctItems.Add(ti.Item);
                     transaction.Add(ti);
                     
 
@@ -64,7 +90,7 @@ namespace Mousourouli.MDE.Recommendation
 
         public void LogTranscaction()
         {
-            foreach (IList<TransactionItem> transaction in Transactions)
+            foreach (IList<TransactionItem> transaction in _Transactions)
             {
                 log.Debug("Start Trans:{");
                 foreach (TransactionItem item in transaction)
@@ -75,7 +101,7 @@ namespace Mousourouli.MDE.Recommendation
             }
 
             StringBuilder sb = new StringBuilder();
-            foreach (int itemValue in DistinctItems)
+            foreach (int itemValue in _DistinctItems)
             {
                 sb.AppendFormat("{0}:",itemValue);
             }
@@ -83,9 +109,28 @@ namespace Mousourouli.MDE.Recommendation
 
 
         }
-        
-        
 
+
+
+
+
+        #region IEnumerable<IList<TransactionItem>> Members
+
+        public IEnumerator<IList<TransactionItem>> GetEnumerator()
+        {
+            return _Transactions.GetEnumerator();
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        #endregion
     }
 
 

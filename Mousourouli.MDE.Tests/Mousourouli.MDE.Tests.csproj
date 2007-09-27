@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Log4netLoader.cs" />
+    <Compile Include="TransactionManagerTests.cs" />
     <Compile Include="WeightingSchemaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

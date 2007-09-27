@@ -24,7 +24,7 @@ namespace Mousourouli.MDE.Tests
         [SetUp]
         protected void SetUp()
         {
-            log.Debug("SetUp");
+          
             distanceS = new DistanceBasedWeightingSchema();
             booleanS = new BooleanWeightingSchema();
         
