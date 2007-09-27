@@ -21,8 +21,8 @@ namespace Mousourouli.MDE.Recommendation
             //User current status (input) ... session window
             //Recommendations RecommendationAlgorithm(Matrix, user input, recommendation algorithm);
 
-            TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\Mousourouli.MDE\testdata\smalltest.txt");
-            tm.LogTranscaction();
+            TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\Code\testdata\kosarak.dat");
+            //tm.LogTranscaction();
             Console.WriteLine("End");
             Console.ReadLine();
 
