@@ -13,7 +13,7 @@ namespace Mousourouli.MDE.Tests
     {
         static readonly int[] TestData ={ 1, 6, 73, 39, 308, 2, 33 };
 
-        private IList<int> _DistinctItems;
+        private Set<int> _DistinctItems;
 
 
         static MappingTests()
@@ -21,12 +21,13 @@ namespace Mousourouli.MDE.Tests
             log4net.Config.XmlConfigurator.Configure();
         }
 
-        public log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
+        private log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         [SetUp]
         protected void SetUp()
         {
-            _DistinctItems = new List<int>(TestData);
+            _DistinctItems = new Set<int>(TestData);
 
         }
 
@@ -56,6 +57,40 @@ namespace Mousourouli.MDE.Tests
             
 
         }
+
+
+
+        [Test]
+        public void SaveToFileTest()
+        {
+            Mapping mapping = new Mapping(_DistinctItems);
+
+            Utilities.SaveToFile(@"c:\temp\mapping.dat",mapping);
+
+
+        }
+
+
+        [Test]
+        public void OpenFromFileTest()
+        {
+            Mapping mapping = Utilities.ReadFromFile(@"c:\temp\mapping.dat") as Mapping;
+
+            Assert.AreEqual(mapping.Index2Real(0), 1);
+            Assert.AreEqual(mapping.Index2Real(1), 6);
+            Assert.AreEqual(mapping.Index2Real(4), 308);
+            Assert.AreEqual(mapping.Index2Real(6), 33);
+
+
+            Assert.AreEqual(mapping.Real2Index(1), 0);
+            Assert.AreEqual(mapping.Real2Index(6), 1);
+            Assert.AreEqual(mapping.Real2Index(308), 4);
+            Assert.AreEqual(mapping.Real2Index(33), 6);
+            
+
+
+        }
+
 
 
 

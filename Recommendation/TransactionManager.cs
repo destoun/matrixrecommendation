@@ -41,26 +41,6 @@ namespace Mousourouli.MDE.Recommendation
 
         #endregion 
 
-        public IList<TransactionItem> this[int i]
-        {
-            get
-            {
-                return _Transactions[i];
-            }
-
-        }
-
-        public int Count
-        {
-            get
-            {
-                return _Transactions.Count;
-            }
-        }
-
-
-        
-
         IList<TransactionItem> CreateTransaction(string line)
         {
             List<TransactionItem> transaction = new List<TransactionItem>();
@@ -119,24 +99,44 @@ namespace Mousourouli.MDE.Recommendation
 
         }
 
-        
-        #region IEnumerable<IList<TransactionItem>> Members
+
+        public IList<TransactionItem> this[int i]
+        {
+            get
+            {
+                return _Transactions[i];
+            }
+
+        }
+
+        public int Count
+        {
+            get
+            {
+                return _Transactions.Count;
+            }
+        }
+
+        public Set<int> DistinctItems
+        {
+            get
+            {
+                return _DistinctItems;
+            }
+
+        }
 
         public IEnumerator<IList<TransactionItem>> GetEnumerator()
         {
             return _Transactions.GetEnumerator();
         }
 
-        #endregion
-
-        #region IEnumerable Members
-
+ 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
-        #endregion
     }
 
 
