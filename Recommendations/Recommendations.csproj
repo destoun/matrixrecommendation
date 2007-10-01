@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{71A2E3C3-6886-48E0-B734-35A6D1B9BCD4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mousourouli.MDE.Tests</RootNamespace>
-    <AssemblyName>Mousourouli.MDE.Tests</AssemblyName>
+    <RootNamespace>Mousourouli.MDE.Recommendation</RootNamespace>
+    <AssemblyName>Recommendations</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,38 +32,26 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="MathNet.Iridium, Version=2007.3.8.40537, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework.extensions, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\nunit.framework.extensions.dll</HintPath>
+      <HintPath>..\Library\MathNet.Iridium.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Log4netLoader.cs" />
-    <Compile Include="MappingTests.cs" />
-    <Compile Include="MatrixBasedAlgorithmTests.cs" />
-    <Compile Include="TransactionManagerTests.cs" />
-    <Compile Include="WeightingSchemaTests.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mousourouli.MDE.Recommendation\Mousourouli.MDE.Recommendation.csproj">
       <Project>{BC424B94-E7DC-4E2B-B522-1921AB152414}</Project>
       <Name>Mousourouli.MDE.Recommendation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
