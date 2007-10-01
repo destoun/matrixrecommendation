@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateMatrix", "Recommendation\CreateMatrix.csproj", "{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mousourouli.MDE.Tests", "Mousourouli.MDE.Tests\Mousourouli.MDE.Tests.csproj", "{71A2E3C3-6886-48E0-B734-35A6D1B9BCD4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{8424B787-5DB6-46B6-B594-EE71332271E8}"
@@ -16,16 +14,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{8424
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mousourouli.MDE.Recommendation", "Mousourouli.MDE.Recommendation\Mousourouli.MDE.Recommendation.csproj", "{BC424B94-E7DC-4E2B-B522-1921AB152414}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateMatrix", "CreateMatrix\CreateMatrix.csproj", "{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recommendations", "Recommendations\Recommendations.csproj", "{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71A2E3C3-6886-48E0-B734-35A6D1B9BCD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71A2E3C3-6886-48E0-B734-35A6D1B9BCD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A2E3C3-6886-48E0-B734-35A6D1B9BCD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -34,6 +32,14 @@ Global
 		{BC424B94-E7DC-4E2B-B522-1921AB152414}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC424B94-E7DC-4E2B-B522-1921AB152414}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC424B94-E7DC-4E2B-B522-1921AB152414}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F2F180-550F-4EE7-A5C2-AE347DDEE9C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

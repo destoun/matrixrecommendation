@@ -26,46 +26,15 @@ namespace Mousourouli.MDE.Recommendation
         {
    
             TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\Code\testdata\partofkosarak.dat");
-
-            
-            
             Mapping mapping = new Mapping(tm.DistinctItems);
-            Matrix matrix = new Matrix(mapping.Count, mapping.Count);
+            
             //            WeightingSchema BWSchema = new BooleanWeightingSchema();
             WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
 
 
-            foreach(IList<TransactionItem> transaction in tm)
-            {
-                IList<TransactionItem> indexedTransaction = mapping.Real2IndexMapping(transaction);
-                int pos = 0;
-                int total_trItems = 0;
+            MatrixCreator mc = new MatrixCreator();
 
-                foreach(TransactionItem trItem in indexedTransaction)
-                {
-                    if( pos>0 )
-                    {
-                        total_trItems++;
-                        int posItems = 0;
-                        for (int i = pos-1; i >= 0; i--)
-                        {
-                            double weight = 0;
-                            if (indexedTransaction[i].IsPositive)
-                                posItems++;
-                            else
-                                continue;
-
-                            if (trItem.IsPositive)
-                                weight = BWSchema.CalculatePositiveWeight(posItems, (total_trItems + 1));
-                            else
-                                weight = BWSchema.CalculateNegativeWeight(posItems, (total_trItems + 1));
-
-                            matrix[indexedTransaction[i].Item, trItem.Item] += weight;
-                        }
-                    }
-                    pos++;
-                }
-            }
+            Matrix matrix = mc.Generate(tm, mapping, BWSchema);
 
             Utilities.SaveToFile("mapping.dat",mapping);
             Utilities.SaveToFile("matrix.dat", matrix);
@@ -73,7 +42,7 @@ namespace Mousourouli.MDE.Recommendation
             LogMatrix(matrix);
 
             Console.WriteLine("End");
-            Console.ReadLine();
+            //Console.ReadLine();
 
         }
 
