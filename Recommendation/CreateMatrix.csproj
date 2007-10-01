@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mousourouli.MDE.Recommendation</RootNamespace>
-    <AssemblyName>Recommendation</AssemblyName>
+    <AssemblyName>CreateMatrix</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,18 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataReader.cs" />
-    <Compile Include="Mapping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Set.cs" />
-    <Compile Include="TransactionItem.cs" />
-    <Compile Include="TransactionManager.cs" />
-    <Compile Include="Utilities.cs" />
-    <Compile Include="WeightingSchema.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mousourouli.MDE.Recommendation\Mousourouli.MDE.Recommendation.csproj">
+      <Project>{BC424B94-E7DC-4E2B-B522-1921AB152414}</Project>
+      <Name>Mousourouli.MDE.Recommendation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
