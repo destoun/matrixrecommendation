@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using Mousourouli.MDE.Recommendation.Algorithms;
 using MathNet.Numerics.LinearAlgebra;
+using log4net;
 
 namespace Mousourouli.MDE.Recommendation
 {
-    class Program
+    class RecommendationsProgram
     {
+        private static ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
+        static RecommendationsProgram()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+        }
+
+
         static readonly string TestData =
 @"1 2 3 4
 1 3 4
@@ -16,7 +26,7 @@ namespace Mousourouli.MDE.Recommendation
 4 2 1
 4 2 1";
 
-        static readonly string TestData2 = @"4";
+        static readonly string TestData2 = @"1";
 
 
         static void Main(string[] args)
@@ -31,8 +41,8 @@ namespace Mousourouli.MDE.Recommendation
 
             Mapping mapping = new Mapping(tm.DistinctItems);
 
-            WeightingSchema BWSchema = new BooleanWeightingSchema();
-            //WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
+            //WeightingSchema BWSchema = new BooleanWeightingSchema();
+            WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
 
 
             MatrixCreator mc = new MatrixCreator();

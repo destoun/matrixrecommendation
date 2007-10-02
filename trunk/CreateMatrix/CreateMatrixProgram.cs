@@ -12,12 +12,12 @@ using System.Runtime.Serialization.Formatters.Soap;
 
 namespace Mousourouli.MDE.Recommendation
 {
-    class Program
+    class CreateMatrixProgram
     {
         private static ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
-        static Program()
+        static CreateMatrixProgram()
         {
             log4net.Config.XmlConfigurator.Configure();
         }
