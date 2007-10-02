@@ -18,59 +18,77 @@ namespace Mousourouli.MDE.Recommendation
         }
 
 
-        static readonly string TestData =
-@"1 2 3 4
-1 3 4
-3 2 1
-4 2 1
-4 2 1
-4 2 1";
+        static IList<TransactionItem> ReadBasket(string[] args)
+        {
+            IList<TransactionItem> transaction = new List<TransactionItem>();
 
-        static readonly string TestData2 = @"1";
+            if (args.Length == 0)
+                throw new Exception("No transaction provided") ;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                string item = args[i].Trim();
+                int itemValue = 0;
+                try
+                {
+                    itemValue = Convert.ToInt32(item);
+                }
+                catch (Exception ex)
+                {
+                   
+                    log.Error(ex);
+                    throw ex;
+                }
+
+                TransactionItem ti = new TransactionItem(Math.Abs(itemValue), (itemValue >= 0) ? true : false);
+               
+                transaction.Add(ti);
+
+
+            }
+
+            return transaction;
+        }
+
+
 
 
         static void Main(string[] args)
         {
-             TransactionManager tm = new TransactionManager(
-                                        new System.IO.MemoryStream(
-                                            System.Text.ASCIIEncoding.Default.GetBytes(TestData)));
 
-            TransactionManager tm2 = new TransactionManager(
-                                        new System.IO.MemoryStream(
-                                            System.Text.ASCIIEncoding.Default.GetBytes(TestData2)));
+            IList<TransactionItem> basket = ReadBasket(args);
 
-            Mapping mapping = new Mapping(tm.DistinctItems);
 
-            //WeightingSchema BWSchema = new BooleanWeightingSchema();
+            Matrix matrix = Utilities.ReadFromFile("matrix.dat") as Matrix;
+            Mapping mapping = Utilities.ReadFromFile("mapping.dat") as Mapping;
             WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
 
-
-            MatrixCreator mc = new MatrixCreator();
-
-            Matrix matrix = mc.Generate(tm, mapping, BWSchema);
-
             IRecommendation rec = new MatrixBasedAlgorithm();
-            IList<TransactionItem> basket = mapping.Real2IndexMapping( tm2[0] );
+            
             IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, basket);
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("\r\n");
-            for (int i = 0; i < matrix.RowCount; i++)
-            {
-                for (int j = 0; j < matrix.ColumnCount; j++)
-                {
-                    sb.AppendFormat("{0}\t", matrix[i, j]);
-                }
-                sb.Append("\r\n");
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append("\r\n");
+            //for (int i = 0; i < matrix.RowCount; i++)
+            //{
+            //    for (int j = 0; j < matrix.ColumnCount; j++)
+            //    {
+            //        sb.AppendFormat("{0}\t", matrix[i, j]);
+            //    }
+            //    sb.Append("\r\n");
 
-            }
+            //}
 
-            Console.WriteLine(sb.ToString());
+            //Console.WriteLine(sb.ToString());
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
+            int i = 0;
             foreach(KeyValuePair<int,double> vp in result)
             {
+                if ((i++) > 10)
+                    break;
+
                 Console.WriteLine(mapping.Index2Real( vp.Key ) + ":" + vp.Value);
 
             }

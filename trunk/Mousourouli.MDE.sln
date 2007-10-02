@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateMatrix", "CreateMatri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recommendations", "Recommendations\Recommendations.csproj", "{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTransformation", "FileTransformation\FileTransformation.csproj", "{FB572FDA-A30A-4468-A7BD-B6D976BB7A15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DBD8F2A-4C45-4EE1-8A03-1A004A15BA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB572FDA-A30A-4468-A7BD-B6D976BB7A15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB572FDA-A30A-4468-A7BD-B6D976BB7A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB572FDA-A30A-4468-A7BD-B6D976BB7A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB572FDA-A30A-4468-A7BD-B6D976BB7A15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

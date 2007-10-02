@@ -24,14 +24,12 @@ namespace Mousourouli.MDE.Recommendation
 
         static void Main(string[] args)
         {
-   
-            TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\Code\testdata\partofkosarak.dat");
+
+            TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\data\bms.dat");
             Mapping mapping = new Mapping(tm.DistinctItems);
             
-            //            WeightingSchema BWSchema = new BooleanWeightingSchema();
+            //WeightingSchema BWSchema = new BooleanWeightingSchema();
             WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
-
-
             MatrixCreator mc = new MatrixCreator();
 
             Matrix matrix = mc.Generate(tm, mapping, BWSchema);
@@ -50,7 +48,6 @@ namespace Mousourouli.MDE.Recommendation
         public static void LogMatrix(Matrix matrix)
         {
 
-
             StringBuilder sb = new StringBuilder();
             sb.Append("\r\n");
             for (int i = 0; i < matrix.RowCount; i++)
@@ -60,15 +57,9 @@ namespace Mousourouli.MDE.Recommendation
                     sb.AppendFormat("{0}\t", matrix[i, j]);
                 }
                 sb.Append("\r\n");
-
             }
-
             log.Debug(sb.ToString());
 
         }
-
-        
-
-
     }
 }
