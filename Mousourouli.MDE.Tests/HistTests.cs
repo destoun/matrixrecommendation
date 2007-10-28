@@ -44,16 +44,39 @@ namespace Mousourouli.MDE.Tests
             Matrix l = new Matrix(A);
             HitsResult result = new Mousourouli.MDE.Recommendation.Hits().CalculateHits(l);
 
-            Assert.AreEqual(result.Authorities[0], 0.0, 0.0001);
-            Assert.AreEqual(result.Authorities[1], 0.0, 0.0001);
-            Assert.AreEqual(result.Authorities[2], 0.3660, 0.0001);
+            Assert.AreEqual(result.Authorities[0].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Authorities[1].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Authorities[2].Value, 0.3660, 0.0001);
 
-            Assert.AreEqual(result.Hubs[0], 0.3660, 0.0001);
-            Assert.AreEqual(result.Hubs[1], 0.0, 0.0001);
-            Assert.AreEqual(result.Hubs[2], 0.2113, 0.0001);
+            Assert.AreEqual(result.Hubs[0].Value, 0.3660, 0.0001);
+            Assert.AreEqual(result.Hubs[1].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Hubs[2].Value, 0.2113, 0.0001);
 
 
         }
+
+
+        [Test]
+        public void PerformSparseHitsTest()
+        {
+            Matrix l = new Matrix(A);
+            List<int> indices = new List<int>();
+            for (int i = 0; i < l.RowCount; i++)
+                indices.Add(i);
+
+            HitsResult result = new Mousourouli.MDE.Recommendation.Hits().CalculateSparseHits(l,indices);
+
+            Assert.AreEqual(result.Authorities[0].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Authorities[1].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Authorities[2].Value, 0.3660, 0.0001);
+
+            Assert.AreEqual(result.Hubs[0].Value, 0.3660, 0.0001);
+            Assert.AreEqual(result.Hubs[1].Value, 0.0, 0.0001);
+            Assert.AreEqual(result.Hubs[2].Value, 0.2113, 0.0001);
+
+
+        }
+
 
         public static string ListVectorToString(IList<double> m)
         {
