@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Algorithms\IRecommendation.cs" />
     <Compile Include="Algorithms\MatrixBasedAlgorithm.cs" />
+    <Compile Include="Hits.cs" />
     <Compile Include="Mapping.cs" />
     <Compile Include="MatrixCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
