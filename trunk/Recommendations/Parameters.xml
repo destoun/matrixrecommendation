@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <appSettings>
 
-	<add key="DataFile" value="D:\work\iwanna\diplomatki\Code\testdata\smalltest.txt"/>
+	<add key="DataFile" value="D:\DIPLOMATIKI_MDE\execs\smalltest.txt"/>
 
 	<add key="WeightingSchema" value="BooleanBased"/>
 	<!--<add key="WeightingSchema" value="DistanceBased"/>-->
 
-	<add key="MatrixFile" value="D:\work\iwanna\diplomatki\Code\testdata\matrix.dat"/>
-	<add key="MappingFile" value="D:\work\iwanna\diplomatki\Code\testdata\mapping.dat"/>
+	<add key="MatrixFile" value="D:\DIPLOMATIKI_MDE\execs\matrix.dat"/>
+	<add key="MappingFile" value="D:\DIPLOMATIKI_MDE\execs\mapping.dat"/>
 
 	<add key="NumOfRecommendations" value="10"/>
 	<add key="HitsIterations" value="15"/>
