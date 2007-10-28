@@ -9,7 +9,7 @@ namespace Mousourouli.MDE.Recommendation
 {
     public class Hits
     {
-        protected static readonly int ITERATIONS = 15;
+        protected int _iterations = 15;
 
         [NonSerialized]
         private static ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -18,6 +18,11 @@ namespace Mousourouli.MDE.Recommendation
         {
 
         
+        }
+
+        public Hits(int iterations)
+        {
+            _iterations = iterations;
         }
 
 
@@ -37,7 +42,7 @@ namespace Mousourouli.MDE.Recommendation
             log.Debug("ltl");
             Matrix ltl = MutliplySparseMatrices( lt , l, indices); //ltl authority matrix
 
-            for (int iteration = 0; iteration < ITERATIONS; iteration++)
+            for (int iteration = 0; iteration < _iterations; iteration++)
             {
                 log.Debug("Iteration:" + iteration);
                 hubs = llt * hubs;
@@ -55,20 +60,22 @@ namespace Mousourouli.MDE.Recommendation
 
         Matrix MutliplySparseMatrices(Matrix m1, Matrix m2, IList<int> indices)
         {
-            Matrix X = new Matrix(m1.RowCount, m2.ColumnCount);
-			for (int j = 0; j < m2.ColumnCount; j++)
-			{
-				for (int i = 0; i < m1.RowCount; i++)
-				{
-					double s = 0;
-					foreach(int k in indices) 
-					{
-						s += m1[i, k] * m2[k, j];
-					}
-					X[i, j] = s;
-				}
-			}
-			return X;
+
+            return m1 * m2;
+            //Matrix X = new Matrix(m1.RowCount, m2.ColumnCount);
+            //for (int j = 0; j < m2.ColumnCount; j++)
+            //{
+            //    for (int i = 0; i < m1.RowCount; i++)
+            //    {
+            //        double s = 0;
+            //        foreach(int k in indices) 
+            //        {
+            //            s += m1[i, k] * m2[k, j];
+            //        }
+            //        X[i, j] = s;
+            //    }
+            //}
+            //return X;
 
         }
 
@@ -90,7 +97,7 @@ namespace Mousourouli.MDE.Recommendation
             log.Debug("ltl");
             Matrix ltl = lt * l; //ltl authority matrix
 
-            for (int iteration = 0; iteration < ITERATIONS; iteration++)
+            for (int iteration = 0; iteration < _iterations; iteration++)
             {
                 log.Debug("Iteration:" + iteration);
                 hubs = llt * hubs;

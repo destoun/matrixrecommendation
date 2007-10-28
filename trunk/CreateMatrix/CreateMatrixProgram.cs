@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using log4net;
 using MathNet.Numerics.LinearAlgebra;
-
-
+using System.Configuration;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Formatters.Soap;
+
 
 namespace Mousourouli.MDE.Recommendation
 {
@@ -24,23 +23,35 @@ namespace Mousourouli.MDE.Recommendation
 
         static void Main(string[] args)
         {
+            log.Info("Start");
+            String DataFile = System.Configuration.ConfigurationManager.AppSettings["DataFile"];
+            String WeightingSchema = System.Configuration.ConfigurationManager.AppSettings["WeightingSchema"];
 
-            TransactionManager tm = new TransactionManager(@"D:\work\iwanna\diplomatki\data\bms.dat");
+            String MappingFile = System.Configuration.ConfigurationManager.AppSettings["MappingFile"];
+            String MatrixFile = System.Configuration.ConfigurationManager.AppSettings["MatrixFile"];
+
+            log.Info("Read Transactions");
+            TransactionManager tm = new TransactionManager(DataFile);
             Mapping mapping = new Mapping(tm.DistinctItems);
             
-            //WeightingSchema BWSchema = new BooleanWeightingSchema();
-            WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
-            MatrixCreator mc = new MatrixCreator();
+            WeightingSchema BWSchema;
+            if (WeightingSchema.StartsWith("Bool"))
+                BWSchema  = new BooleanWeightingSchema();
+            else
+                BWSchema = new DistanceBasedWeightingSchema();
 
+            log.Info("Creating Matrix");
+            MatrixCreator mc = new MatrixCreator();
             Matrix matrix = mc.Generate(tm, mapping, BWSchema);
 
-            Utilities.SaveToFile("mapping.dat",mapping);
-            Utilities.SaveToFile("matrix.dat", matrix);
-            
-            //LogMatrix(matrix);
+            log.Info("Saving Files");
+            Utilities.SaveToFile(MappingFile,mapping);
+            Utilities.SaveToFile(MatrixFile, matrix);
 
-            Console.WriteLine("End");
-            //Console.ReadLine();
+            if (log.IsDebugEnabled)
+                LogMatrix(matrix);
+            
+            log.Info("Done!");
 
         }
 

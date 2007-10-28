@@ -7,6 +7,12 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 {
     public class MatrixBasedAlgorithm: IRecommendation
     {
+        private int _topItems;
+
+        public MatrixBasedAlgorithm(int TopItems)
+        {
+            _topItems = TopItems;
+        }
         
         public IList<KeyValuePair<int,double>> GenerateRecommendations(MathNet.Numerics.LinearAlgebra.Matrix matrix, IList<TransactionItem> currentBasket)
         {
@@ -29,8 +35,17 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
             });
 
 
-            return list;
+            return TopX( list );
             
+        }
+
+        public IList<KeyValuePair<int, double>> TopX(IList<KeyValuePair<int, double>> list)
+        {
+            IList<KeyValuePair<int, double>> result = new List<KeyValuePair<int, double>>();
+            for (int i = 0; i < list.Count && i < _topItems; i++)
+                result.Add(list[i]);
+
+            return result;
         }
 
     }
