@@ -7,6 +7,7 @@ namespace Mousourouli.MDE.Recommendation
 {
     public class MatrixCreator
     {
+
         public Matrix Generate(TransactionManager tm, Mapping mapping, WeightingSchema BWSchema)
         {
             Matrix matrix = new Matrix(mapping.Count, mapping.Count);
@@ -35,7 +36,7 @@ namespace Mousourouli.MDE.Recommendation
                                 weight = BWSchema.CalculatePositiveWeight(posItems, (total_trItems + 1));
                             else
                                 weight = BWSchema.CalculateNegativeWeight(posItems, (total_trItems + 1));
-
+                            
                             matrix[indexedTransaction[i].Item, trItem.Item] += weight;
                         }
                     }
@@ -43,7 +44,22 @@ namespace Mousourouli.MDE.Recommendation
                 }
             }
 
-            return matrix;
+            return NegativeItems(matrix);
+        }
+
+        public Matrix NegativeItems(Matrix input)
+        {
+            int rowCount = input.RowCount;
+            int columnCount = input.ColumnCount;
+            for (int i = 0; i < rowCount; i++)
+            {
+                for (int j = 0; j < columnCount; j++)
+                {
+                    if (input[i, j] < 0)
+                        input[i, j] = 0;
+                }
+            }
+            return input;
         }
 
     }

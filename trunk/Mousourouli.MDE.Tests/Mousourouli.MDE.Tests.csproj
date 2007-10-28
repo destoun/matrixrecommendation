@@ -32,6 +32,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Iridium, Version=2007.3.8.40537, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\MathNet.Iridium.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\nunit.core.dll</HintPath>
@@ -49,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistTests.cs" />
     <Compile Include="Log4netLoader.cs" />
     <Compile Include="MappingTests.cs" />
     <Compile Include="MatrixBasedAlgorithmTests.cs" />

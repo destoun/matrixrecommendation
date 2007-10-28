@@ -37,7 +37,7 @@ namespace Mousourouli.MDE.Recommendation
             Utilities.SaveToFile("mapping.dat",mapping);
             Utilities.SaveToFile("matrix.dat", matrix);
             
-            LogMatrix(matrix);
+            //LogMatrix(matrix);
 
             Console.WriteLine("End");
             //Console.ReadLine();
