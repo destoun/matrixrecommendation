@@ -35,7 +35,6 @@ namespace Mousourouli.MDE.Recommendation
                 }
                 catch (Exception ex)
                 {
-                   
                     log.Error(ex);
                     throw ex;
                 }
@@ -55,29 +54,53 @@ namespace Mousourouli.MDE.Recommendation
 
         static void Main(string[] args)
         {
+            
+            String MappingFile = System.Configuration.ConfigurationManager.AppSettings["MappingFile"];
+            String MatrixFile = System.Configuration.ConfigurationManager.AppSettings["MatrixFile"];
+            String NumOfRecommendations = System.Configuration.ConfigurationManager.AppSettings["NumOfRecommendations"];
+            String HitsIterations = System.Configuration.ConfigurationManager.AppSettings["HitsIterations"];
+            String HitsAverageBasketSize = System.Configuration.ConfigurationManager.AppSettings["HitsAverageBasketSize"];
+            String IsSparseMultiplication = System.Configuration.ConfigurationManager.AppSettings["IsSparseMultiplication"];
+            String RecommendationAlgorithm = System.Configuration.ConfigurationManager.AppSettings["RecommendationAlgorithm"];
 
+
+            log.Info("Reading Transaction");
             IList<TransactionItem> basket = ReadBasket(args);
 
 
-            Matrix matrix = Utilities.ReadFromFile("matrix.dat") as Matrix;
-            Mapping mapping = Utilities.ReadFromFile("mapping.dat") as Mapping;
+            log.Info("Reading Matrix file");
+            log.Info("Reading Mapping file");
+            Matrix matrix = Utilities.ReadFromFile(MatrixFile) as Matrix;
+            Mapping mapping = Utilities.ReadFromFile(MappingFile) as Mapping;
 
-            //IRecommendation rec = new HitsBasedAlgorithm(25); //MatrixBasedAlgorithm();
-            IRecommendation rec = new MatrixBasedAlgorithm();
-            IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, basket);
-
-            
-
-            int i = 0;
-            foreach(KeyValuePair<int,double> vp in result)
+            IRecommendation rec;
+            if (RecommendationAlgorithm.StartsWith("Matrix"))
             {
-                if ((i++) > 10)
-                    break;
-
-                Console.WriteLine(mapping.Index2Real( vp.Key ) + ":" + vp.Value);
+                rec = new MatrixBasedAlgorithm(Convert.ToInt32(NumOfRecommendations));
+            }
+            else
+            {
+                rec = new HitsBasedAlgorithm(Convert.ToInt32(HitsAverageBasketSize),
+                    Convert.ToInt32(NumOfRecommendations),
+                    Convert.ToInt32(HitsIterations),
+                    Convert.ToBoolean(IsSparseMultiplication));
 
             }
-            Console.ReadLine();
+
+
+            log.Info("Calculate Recommendation based on" + RecommendationAlgorithm);
+            IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix,mapping.Real2IndexMapping( basket ));
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("\r\n");
+            foreach(KeyValuePair<int,double> vp in result)
+            {
+                sb.AppendFormat("{0}:{1:0.000}\r\n", mapping.Index2Real( vp.Key ) , vp.Value);
+                
+
+            }
+            log.Info(sb.ToString());
+            
         }
     }
 }

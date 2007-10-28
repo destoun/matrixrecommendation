@@ -8,15 +8,21 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 {
     public class HitsBasedAlgorithm: IRecommendation
     {
-        public static readonly int TOPITEMS = 10;
-
-        private int _averageBasketSize;
+        int _topItems;
+        int _iterations;
+        int _averageBasketSize;
+        bool _sparseFlag;
         
 
-        public HitsBasedAlgorithm(int AverageBasketSize)
+        public HitsBasedAlgorithm(int AverageBasketSize,int TopItems, int Iterations, bool SparseFlag)
         {
+
             System.Diagnostics.Debug.Assert(AverageBasketSize>0);
             _averageBasketSize = AverageBasketSize;
+            _topItems = TopItems;
+            _iterations = Iterations;
+            _sparseFlag = SparseFlag;
+
         }
 
 
@@ -43,8 +49,11 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 
             }
 
-            HitsResult hitsresult = new Hits().CalculateSparseHits(subMatrix,indices);
-
+            HitsResult hitsresult;
+            if (_sparseFlag)
+                hitsresult  = new Hits().CalculateSparseHits(subMatrix,indices);
+            else
+                hitsresult = new Hits().CalculateHits(subMatrix);
 
             hitsresult.Authorities.Sort(delegate(KeyValuePair<int, double> x, KeyValuePair<int, double> y)
             {
@@ -60,32 +69,31 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 
 
             double currentBaskPersentage = ((double)currentBasket.Count / (double)_averageBasketSize) * 100.0;
-            IList<KeyValuePair<int,double>> topHubs = TopX(hitsresult.Hubs,TOPITEMS);
-            IList<KeyValuePair<int,double>> topAuthorities = TopX(hitsresult.Authorities,TOPITEMS);
+            IList<KeyValuePair<int,double>> topHubs = TopX(hitsresult.Hubs);
+            IList<KeyValuePair<int,double>> topAuthorities = TopX(hitsresult.Authorities);
 
-            if (currentBaskPersentage <= 20)
-            {
-                return topHubs;
-            }
-            else if (currentBaskPersentage > 20 && currentBaskPersentage <= 80)
-            {
-                return MergeHubsAndAuthorities(topHubs, topAuthorities, TOPITEMS);
-            }
-            else
-            {
-                return topAuthorities;
+            //if (currentBaskPersentage <= 20)
+            //{
+            //    return topHubs;
+            //}
+            //else if (currentBaskPersentage > 20 && currentBaskPersentage <= 80)
+            //{
+            return MergeHubsAndAuthorities(topHubs, topAuthorities);
+            //}
+            //else
+            //{
+            //    return topAuthorities;
 
-            }
+            //}
             
-         
-            return null;
+
             
         }
 
-        public IList<KeyValuePair<int,double>> TopX(IList<KeyValuePair<int,double>> list,int x)
+        public IList<KeyValuePair<int,double>> TopX(IList<KeyValuePair<int,double>> list)
         {
             IList<KeyValuePair<int,double>> result = new List<KeyValuePair<int,double>>();
-            for (int i = 0; i < list.Count  && i< x; i++)
+            for (int i = 0; i < list.Count  && i< _topItems; i++)
                     result.Add(list[i]);
 
                 return result;
@@ -94,24 +102,30 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 
         public IList<KeyValuePair<int, double>> MergeHubsAndAuthorities(
             IList<KeyValuePair<int, double>> hubs,
-            IList<KeyValuePair<int, double>> authorities,int x)
+            IList<KeyValuePair<int, double>> authorities)
         {
-            IList<KeyValuePair<int, double>> result = new List<KeyValuePair<int, double>>();
-            for (int i = 0; i < hubs.Count && i < x/2; i++)
+            List<KeyValuePair<int, double>> result = new List<KeyValuePair<int, double>>();
+            for (int i = 0; i < hubs.Count && i < _topItems/2; i++)
                 result.Add(hubs[i]);
 
-            for (int i = 0; i < authorities.Count && result.Count <= 10; i++)
-            {
-                if (!result.Contains(authorities[i]))
-                    result.Add(authorities[i]);
-            }
+            for (int i = 0; i < authorities.Count && i < _topItems / 2; i++)
+                result.Add(authorities[i]);
+
+            //for (int i = 0; i < authorities.Count && result.Count <= _topItems; i++)
+            //{
+            //    if (!result.Exists(
+            //        delegate(KeyValuePair<int,double> item){
+            //            return authorities[i].Key == item.Key;
+                        
+            //    }))
+            //        result.Add(authorities[i]);
+            //}
 
             return result;
 
         }
 
 
-
-
+        
     }
 }

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+
+	<add key="DataFile" value="D:\work\iwanna\diplomatki\Code\testdata\smalltest.txt"/>
+
+	<add key="WeightingSchema" value="BooleanBased"/>
+	<!--<add key="WeightingSchema" value="DistanceBased"/>-->
+
+	<add key="MatrixFile" value="D:\work\iwanna\diplomatki\Code\testdata\matrix.dat"/>
+	<add key="MappingFile" value="D:\work\iwanna\diplomatki\Code\testdata\mapping.dat"/>
+
+	<add key="NumOfRecommendations" value="10"/>
+	<add key="HitsIterations" value="15"/>
+	<add key="HitsAverageBasketSize" value="25"/>
+	<add key="IsSparseMultiplication" value="True"/>
+
+
+	<add key="RecommendationAlgorithm" value="HitsBased"/>
+	<!--<add key="RecommendationAlgorithm" value="MatrixBased"/>-->
+
+</appSettings>
