@@ -2,13 +2,13 @@
 <appSettings>
 
 
-	<add key="DataFile" value="D:\work\iwanna\diplomatki\Code\testdata\smalltest.txt"/>
+	<add key="DataFile" value="..\testdata\smalltest.txt"/>
 
 	<add key="WeightingSchema" value="BooleanBased"/>
 	<!--<add key="WeightingSchema" value="DistanceBased"/>-->
 
-	<add key="MatrixFile" value="D:\work\iwanna\diplomatki\Code\execs\matrix.dat"/>
-	<add key="MappingFile" value="D:\work\iwanna\diplomatki\Code\execs\mapping.dat"/>
+	<add key="MatrixFile" value="matrix.dat"/>
+	<add key="MappingFile" value="mapping.dat"/>
 
 	<add key="NumOfRecommendations" value="10"/>
 	<add key="HitsIterations" value="25"/>
@@ -19,6 +19,6 @@
 	<add key="RecommendationAlgorithm" value="HitsBased"/>
 	<!--<add key="RecommendationAlgorithm" value="MatrixBased"/>-->
 
-	<add key="TransactionsFile" value="D:\work\iwanna\diplomatki\Code\testdata\trans.txt"/>
+	<add key="TransactionsFile" value="..\testdata\trans.txt"/>
 
 </appSettings>
