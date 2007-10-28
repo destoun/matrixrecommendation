@@ -57,6 +57,8 @@ namespace Mousourouli.MDE.Recommendation
             
             String MappingFile = System.Configuration.ConfigurationManager.AppSettings["MappingFile"];
             String MatrixFile = System.Configuration.ConfigurationManager.AppSettings["MatrixFile"];
+            String TransactionsFile = System.Configuration.ConfigurationManager.AppSettings["TransactionsFile"];
+
             String NumOfRecommendations = System.Configuration.ConfigurationManager.AppSettings["NumOfRecommendations"];
             String HitsIterations = System.Configuration.ConfigurationManager.AppSettings["HitsIterations"];
             String HitsAverageBasketSize = System.Configuration.ConfigurationManager.AppSettings["HitsAverageBasketSize"];
@@ -64,13 +66,11 @@ namespace Mousourouli.MDE.Recommendation
             String RecommendationAlgorithm = System.Configuration.ConfigurationManager.AppSettings["RecommendationAlgorithm"];
 
 
-            log.Info("Reading Transaction");
-            IList<TransactionItem> basket = ReadBasket(args);
-
-
+            log.Info("Reading Transaction File");
+            TransactionManager tm = new TransactionManager(TransactionsFile);
             log.Info("Reading Matrix file");
-            log.Info("Reading Mapping file");
             Matrix matrix = Utilities.ReadFromFile(MatrixFile) as Matrix;
+            log.Info("Reading Mapping file");
             Mapping mapping = Utilities.ReadFromFile(MappingFile) as Mapping;
 
             IRecommendation rec;
@@ -84,23 +84,33 @@ namespace Mousourouli.MDE.Recommendation
                     Convert.ToInt32(NumOfRecommendations),
                     Convert.ToInt32(HitsIterations),
                     Convert.ToBoolean(IsSparseMultiplication));
-
             }
 
-
-            log.Info("Calculate Recommendation based on" + RecommendationAlgorithm);
-            IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix,mapping.Real2IndexMapping( basket ));
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("\r\n");
-            foreach(KeyValuePair<int,double> vp in result)
+            log.Info("Calculate Recommendation based on " + RecommendationAlgorithm + " sparse:" + IsSparseMultiplication);
+            foreach (IList<TransactionItem> basket in tm)
             {
-                sb.AppendFormat("{0}:{1:0.000}\r\n", mapping.Index2Real( vp.Key ) , vp.Value);
-                
+                StringBuilder sb = new StringBuilder();
+                sb.Append("\r\nBasket:");
+                foreach (TransactionItem ti in basket)
+                    sb.AppendFormat("{0}:", ti.PositiveValue * ti.Item);
+                sb.Append("\r\n");
+                log.Info(sb.ToString());
 
+                IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, mapping.Real2IndexMapping(basket));
+
+                sb = new StringBuilder();
+                sb.Append("\r\nRecommendations\r\n");
+                foreach (KeyValuePair<int, double> vp in result)
+                    sb.AppendFormat("{0}:{1:0.000}\r\n", mapping.Index2Real(vp.Key), vp.Value);
+
+                log.Info(sb.ToString());
             }
-            log.Info(sb.ToString());
             
         }
+
+
+
+
+
     }
 }

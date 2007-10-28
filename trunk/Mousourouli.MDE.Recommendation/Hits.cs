@@ -32,16 +32,16 @@ namespace Mousourouli.MDE.Recommendation
 
             Matrix initialVector = new Matrix(matrix.RowCount, 1, 1.0);
 
+            
+
             Matrix l = matrix.Clone();
+            
             Matrix hubs = initialVector;
             Matrix authorities = hubs.Clone();
-
             Matrix lt = Matrix.Transpose(l);
-            log.Debug("llt");
             Matrix llt = MutliplySparseMatrices( l , lt, indices); //llt hub matrix
-            log.Debug("ltl");
             Matrix ltl = MutliplySparseMatrices( lt , l, indices); //ltl authority matrix
-
+            
             for (int iteration = 0; iteration < _iterations; iteration++)
             {
                 log.Debug("Iteration:" + iteration);
@@ -57,25 +57,49 @@ namespace Mousourouli.MDE.Recommendation
 
         }
 
+        string LogIndices(IList<int> indices)
+        {
+            
+            StringBuilder sb = new StringBuilder();
+            foreach (int i in indices)
+                sb.AppendFormat("{0}:", i);
+            sb.Append("\r\n");
+
+            return sb.ToString();
+        }
+
 
         Matrix MutliplySparseMatrices(Matrix m1, Matrix m2, IList<int> indices)
         {
 
-            return m1 * m2;
-            //Matrix X = new Matrix(m1.RowCount, m2.ColumnCount);
-            //for (int j = 0; j < m2.ColumnCount; j++)
-            //{
-            //    for (int i = 0; i < m1.RowCount; i++)
-            //    {
-            //        double s = 0;
-            //        foreach(int k in indices) 
-            //        {
-            //            s += m1[i, k] * m2[k, j];
-            //        }
-            //        X[i, j] = s;
-            //    }
-            //}
-            //return X;
+            //return m1 * m2;
+            Matrix X = new Matrix(m1.RowCount, m2.ColumnCount);
+            for (int j = 0; j < m2.ColumnCount; j++)
+            {
+                for (int i = 0; i < m1.RowCount; i++)
+                {
+                    double s = 0;
+                    if (indices.Contains(i) || indices.Contains(j))
+                    {
+                        for(int k = 0; k< m2.ColumnCount; k++)
+                        {
+                            s += m1[i, k] * m2[k, j];
+                        }
+                    }
+                    else
+                    {
+                        foreach (int k in indices)
+                        {
+                            s += m1[i, k] * m2[k, j];
+                        }
+                    }
+                    X[i, j] = s;
+                }
+            }
+
+
+
+            return X;
 
         }
 
@@ -92,11 +116,9 @@ namespace Mousourouli.MDE.Recommendation
             Matrix authorities = hubs.Clone();
 
             Matrix lt = Matrix.Transpose(l);
-            log.Debug("llt");
             Matrix llt = l * lt; //llt hub matrix
-            log.Debug("ltl");
             Matrix ltl = lt * l; //ltl authority matrix
-
+           
             for (int iteration = 0; iteration < _iterations; iteration++)
             {
                 log.Debug("Iteration:" + iteration);
