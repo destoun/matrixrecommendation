@@ -61,27 +61,12 @@ namespace Mousourouli.MDE.Recommendation
 
             Matrix matrix = Utilities.ReadFromFile("matrix.dat") as Matrix;
             Mapping mapping = Utilities.ReadFromFile("mapping.dat") as Mapping;
-            WeightingSchema BWSchema = new DistanceBasedWeightingSchema();
 
+            //IRecommendation rec = new HitsBasedAlgorithm(25); //MatrixBasedAlgorithm();
             IRecommendation rec = new MatrixBasedAlgorithm();
-            
             IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, basket);
 
-            //StringBuilder sb = new StringBuilder();
-            //sb.Append("\r\n");
-            //for (int i = 0; i < matrix.RowCount; i++)
-            //{
-            //    for (int j = 0; j < matrix.ColumnCount; j++)
-            //    {
-            //        sb.AppendFormat("{0}\t", matrix[i, j]);
-            //    }
-            //    sb.Append("\r\n");
-
-            //}
-
-            //Console.WriteLine(sb.ToString());
-
-            //Console.WriteLine();
+            
 
             int i = 0;
             foreach(KeyValuePair<int,double> vp in result)
