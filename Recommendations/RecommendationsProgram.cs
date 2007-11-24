@@ -18,40 +18,6 @@ namespace Mousourouli.MDE.Recommendation
         }
 
 
-        static IList<TransactionItem> ReadBasket(string[] args)
-        {
-            IList<TransactionItem> transaction = new List<TransactionItem>();
-
-            if (args.Length == 0)
-                throw new Exception("No transaction provided") ;
-
-            for (int i = 0; i < args.Length; i++)
-            {
-                string item = args[i].Trim();
-                int itemValue = 0;
-                try
-                {
-                    itemValue = Convert.ToInt32(item);
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex);
-                    throw ex;
-                }
-
-                TransactionItem ti = new TransactionItem(Math.Abs(itemValue), (itemValue >= 0) ? true : false);
-               
-                transaction.Add(ti);
-
-
-            }
-
-            return transaction;
-        }
-
-
-
-
         static void Main(string[] args)
         {
             
@@ -86,27 +52,50 @@ namespace Mousourouli.MDE.Recommendation
                     Convert.ToBoolean(IsSparseMultiplication));
             }
 
-            log.Info("Calculate Recommendation based on " + RecommendationAlgorithm + " sparse:" + IsSparseMultiplication);
-            foreach (IList<TransactionItem> basket in tm)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("\r\nBasket:");
-                foreach (TransactionItem ti in basket)
-                    sb.AppendFormat("{0}:", ti.PositiveValue * ti.Item);
-                sb.Append("\r\n");
-                log.Info(sb.ToString());
+            //log.Info("Calculate Recommendation based on " + RecommendationAlgorithm + " sparse:" + IsSparseMultiplication);
+            //Recommendation(tm, matrix, mapping, rec);
+            Evaluation(tm, matrix, mapping, rec);
+            Console.ReadLine();
 
-                IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, mapping.Real2IndexMapping(basket));
-
-                sb = new StringBuilder();
-                sb.Append("\r\nRecommendations\r\n");
-                foreach (KeyValuePair<int, double> vp in result)
-                    sb.AppendFormat("{0}:{1:0.000}\r\n", mapping.Index2Real(vp.Key), vp.Value);
-
-                log.Info(sb.ToString());
-            }
             
         }
+
+
+        private static void Evaluation(TransactionManager tm,
+            Matrix matrix, Mapping mapping, IRecommendation rec)
+        {
+            Evaluator evaluator = new Evaluator(matrix, mapping, rec, 0.2);
+            foreach (IList<TransactionItem> basket in tm)
+            {
+                evaluator.Evaluate(basket);        
+            }
+
+            
+        }
+
+
+        //private static void Recommendation(TransactionManager tm, 
+        //    Matrix matrix, Mapping mapping, IRecommendation rec)
+        //{
+        //    foreach (IList<TransactionItem> basket in tm)
+        //    {
+        //        StringBuilder sb = new StringBuilder();
+        //        sb.Append("\r\nBasket:");
+        //        foreach (TransactionItem ti in basket)
+        //            sb.AppendFormat("{0}:", ti.PositiveValue * ti.Item);
+        //        sb.Append("\r\n");
+        //        log.Info(sb.ToString());
+
+        //        IList<KeyValuePair<int, double>> result = rec.GenerateRecommendations(matrix, mapping.Real2IndexMapping(basket));
+
+        //        sb = new StringBuilder();
+        //        sb.Append("\r\nRecommendations\r\n");
+        //        foreach (KeyValuePair<int, double> vp in result)
+        //            sb.AppendFormat("{0}:{1:0.000}\r\n", mapping.Index2Real(vp.Key), vp.Value);
+
+        //        log.Info(sb.ToString());
+        //    }
+        //}
 
 
 
