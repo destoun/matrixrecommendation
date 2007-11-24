@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Evaluator.cs" />
+    <Compile Include="StatisticalManager.cs" />
     <Compile Include="TestRecommendationsProgram.cs" />
     <Compile Include="RecommendationsProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

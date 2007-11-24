@@ -2,7 +2,7 @@
 <appSettings>
 
 
-	<add key="DataFile" value="..\testdata\smalltest.txt"/>
+	<add key="DataFile" value="..\testdata\BMSTraining.dat"/>
 
 	<add key="WeightingSchema" value="BooleanBased"/>
 	<!--<add key="WeightingSchema" value="DistanceBased"/>-->
@@ -16,9 +16,10 @@
 	<add key="IsSparseMultiplication" value="False"/>
 
 
-	<add key="RecommendationAlgorithm" value="HitsBased"/>
-	<!--<add key="RecommendationAlgorithm" value="MatrixBased"/>-->
+	<!--<add key="RecommendationAlgorithm" value="HitsBased"/>-->
+	<add key="RecommendationAlgorithm" value="MatrixBased"/>
 
-	<add key="TransactionsFile" value="..\testdata\trans.txt"/>
+	<add key="TransactionsFile" value="..\testdata\BMSTransactions.dat"/>
 
+	<add key="SplitThreshold" value="0,5"/>
 </appSettings>
