@@ -40,14 +40,14 @@ namespace Mousourouli.MDE.Recommendation
             else
                 BWSchema = new DistanceBasedWeightingSchema();
 
-            log.Info("Creating Matrix");
+            log.Info( string.Format ("Creating Matrix from {0}",tm.Count));
             MatrixCreator mc = new MatrixCreator();
             Matrix matrix = mc.Generate(tm, mapping, BWSchema);
 
             log.Info("Saving Files");
             Utilities.SaveToFile(MappingFile,mapping);
             Utilities.SaveToFile(MatrixFile, matrix);
-
+            
             if (log.IsDebugEnabled)
                 LogMatrix(matrix);
             

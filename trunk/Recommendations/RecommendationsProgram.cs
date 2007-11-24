@@ -30,7 +30,8 @@ namespace Mousourouli.MDE.Recommendation
             String HitsAverageBasketSize = System.Configuration.ConfigurationManager.AppSettings["HitsAverageBasketSize"];
             String IsSparseMultiplication = System.Configuration.ConfigurationManager.AppSettings["IsSparseMultiplication"];
             String RecommendationAlgorithm = System.Configuration.ConfigurationManager.AppSettings["RecommendationAlgorithm"];
-
+            double SplitThreshold = Convert.ToDouble( System.Configuration.ConfigurationManager.AppSettings["SplitThreshold"]);
+            
 
             log.Info("Reading Transaction File");
             TransactionManager tm = new TransactionManager(TransactionsFile);
@@ -52,25 +53,32 @@ namespace Mousourouli.MDE.Recommendation
                     Convert.ToBoolean(IsSparseMultiplication));
             }
 
+            string StartCaption = string.Format("Algorithm:{0},SplitThreshold:{1},HitsIterations:{2},HitsAB:{3},{4}", RecommendationAlgorithm, SplitThreshold, 
+                HitsIterations, HitsAverageBasketSize, DateTime.Now);
             //log.Info("Calculate Recommendation based on " + RecommendationAlgorithm + " sparse:" + IsSparseMultiplication);
             //Recommendation(tm, matrix, mapping, rec);
-            Evaluation(tm, matrix, mapping, rec);
+            
+            StatisticalManager sm = new StatisticalManager(StartCaption);
+            sm.LogStatistics(Evaluation(tm, matrix, mapping, rec, SplitThreshold));
+
             Console.ReadLine();
 
             
         }
 
 
-        private static void Evaluation(TransactionManager tm,
-            Matrix matrix, Mapping mapping, IRecommendation rec)
+        private static List<int> Evaluation(TransactionManager tm,
+            Matrix matrix, Mapping mapping, IRecommendation rec, double splitThreshold)
         {
-            Evaluator evaluator = new Evaluator(matrix, mapping, rec, 0.2);
+            int counter = 0;
+            Evaluator evaluator = new Evaluator(matrix, mapping, rec, splitThreshold);
             foreach (IList<TransactionItem> basket in tm)
             {
+                log.Debug(counter++);
                 evaluator.Evaluate(basket);        
             }
 
-            
+            return evaluator.Hits;
         }
 
 
