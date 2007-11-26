@@ -10,19 +10,14 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
     {
         int _topItems;
         int _iterations;
-        int _averageBasketSize;
         bool _sparseFlag;
         
 
-        public HitsBasedAlgorithm(int AverageBasketSize,int TopItems, int Iterations, bool SparseFlag)
+        public HitsBasedAlgorithm(int TopItems, int Iterations, bool SparseFlag)
         {
-
-            System.Diagnostics.Debug.Assert(AverageBasketSize>0);
-            _averageBasketSize = AverageBasketSize;
             _topItems = TopItems;
             _iterations = Iterations;
             _sparseFlag = SparseFlag;
-
         }
 
 
@@ -67,8 +62,6 @@ namespace Mousourouli.MDE.Recommendation.Algorithms
 
            });
 
-
-            double currentBaskPersentage = ((double)currentBasket.Count / (double)_averageBasketSize) * 100.0;
             IList<KeyValuePair<int,double>> topHubs = TopX(hitsresult.Hubs);
             IList<KeyValuePair<int,double>> topAuthorities = TopX(hitsresult.Authorities);
 

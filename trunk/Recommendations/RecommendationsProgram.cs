@@ -24,10 +24,8 @@ namespace Mousourouli.MDE.Recommendation
             String MappingFile = System.Configuration.ConfigurationManager.AppSettings["MappingFile"];
             String MatrixFile = System.Configuration.ConfigurationManager.AppSettings["MatrixFile"];
             String TransactionsFile = System.Configuration.ConfigurationManager.AppSettings["TransactionsFile"];
-
             String NumOfRecommendations = System.Configuration.ConfigurationManager.AppSettings["NumOfRecommendations"];
             String HitsIterations = System.Configuration.ConfigurationManager.AppSettings["HitsIterations"];
-            String HitsAverageBasketSize = System.Configuration.ConfigurationManager.AppSettings["HitsAverageBasketSize"];
             String IsSparseMultiplication = System.Configuration.ConfigurationManager.AppSettings["IsSparseMultiplication"];
             String RecommendationAlgorithm = System.Configuration.ConfigurationManager.AppSettings["RecommendationAlgorithm"];
             double SplitThreshold = Convert.ToDouble( System.Configuration.ConfigurationManager.AppSettings["SplitThreshold"]);
@@ -47,14 +45,13 @@ namespace Mousourouli.MDE.Recommendation
             }
             else
             {
-                rec = new HitsBasedAlgorithm(Convert.ToInt32(HitsAverageBasketSize),
-                    Convert.ToInt32(NumOfRecommendations),
+                rec = new HitsBasedAlgorithm(Convert.ToInt32(NumOfRecommendations),
                     Convert.ToInt32(HitsIterations),
                     Convert.ToBoolean(IsSparseMultiplication));
             }
 
-            string StartCaption = string.Format("Algorithm:{0},SplitThreshold:{1},HitsIterations:{2},HitsAB:{3},{4}", RecommendationAlgorithm, SplitThreshold, 
-                HitsIterations, HitsAverageBasketSize, DateTime.Now);
+            string StartCaption = string.Format("Algorithm:{0},SplitThreshold:{1},HitsIterations:{2},{3}", RecommendationAlgorithm, SplitThreshold, 
+                HitsIterations, DateTime.Now);
             //log.Info("Calculate Recommendation based on " + RecommendationAlgorithm + " sparse:" + IsSparseMultiplication);
             //Recommendation(tm, matrix, mapping, rec);
             
