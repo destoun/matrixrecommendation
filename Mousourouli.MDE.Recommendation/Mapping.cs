@@ -50,8 +50,7 @@ namespace Mousourouli.MDE.Recommendation
         public int Real2Index(int i)
         {
             System.Diagnostics.Debug.Assert(i>=0);
-            
-
+           
             return Real2IndexItems[i];
         }
 
@@ -75,7 +74,6 @@ namespace Mousourouli.MDE.Recommendation
             return result;
         }
 
-
         public IList<int> Index2RealMapping(IEnumerable<int> recommendation)
         {
 
@@ -88,8 +86,5 @@ namespace Mousourouli.MDE.Recommendation
 
             return result;
         }
-
-       
-
     }
 }

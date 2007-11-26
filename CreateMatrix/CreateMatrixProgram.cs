@@ -32,7 +32,8 @@ namespace Mousourouli.MDE.Recommendation
 
             log.Info("Read Transactions");
             TransactionManager tm = new TransactionManager(DataFile);
-            Mapping mapping = new Mapping(tm.DistinctItems);
+            log.Info("Reading Mapping file");
+            Mapping mapping = Utilities.ReadFromFile(MappingFile) as Mapping;
             
             WeightingSchema BWSchema;
             if (WeightingSchema.StartsWith("Bool"))
@@ -45,7 +46,6 @@ namespace Mousourouli.MDE.Recommendation
             Matrix matrix = mc.Generate(tm, mapping, BWSchema);
 
             log.Info("Saving Files");
-            Utilities.SaveToFile(MappingFile,mapping);
             Utilities.SaveToFile(MatrixFile, matrix);
             
             if (log.IsDebugEnabled)

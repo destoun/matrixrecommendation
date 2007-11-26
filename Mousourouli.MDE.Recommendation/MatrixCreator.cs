@@ -7,7 +7,6 @@ namespace Mousourouli.MDE.Recommendation
 {
     public class MatrixCreator
     {
-
         public Matrix Generate(TransactionManager tm, Mapping mapping, WeightingSchema BWSchema)
         {
             Matrix matrix = new Matrix(mapping.Count, mapping.Count);
