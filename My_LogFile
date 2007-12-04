@@ -1,0 +1,179 @@
+============HITS BASED - BOOLEAN MODEL============
+
+========20% of the Transaction for training=========
+Statistical Results: TranSetForTraining50perc.dat - Boolean20percTrainingMatrix.dat
+Algorithm:HitsBased,SplitThreshold:0,25,HitsIterations:25,2/12/2007 9:11:31 לל
+TransactionCount:20993
+TransactionHitsCount:10135
+OneTransactionItemHitsCount:7836
+TwoTransactionItemHitsCount:1883 
+ThreeTransactionItemHitsCount:397
+OverThreeTransactionItemHitsCount:19
+EndTime:3/12/2007 2:22:47 נל
+
+Statistical Results: TranSetForTraining50perc.dat - Boolean20percTrainingMatrix.dat
+Algorithm:HitsBased,SplitThreshold:0,5,HitsIterations:25,3/12/2007 7:16:30 נל
+TransactionCount:20993
+TransactionHitsCount:7780
+OneTransactionItemHitsCount:7239
+TwoTransactionItemHitsCount:520 
+ThreeTransactionItemHitsCount:19
+OverThreeTransactionItemHitsCount:2
+EndTime:3/12/2007 1:02:35 לל
+
+Statistical Results
+Algorithm:HitsBased,SplitThreshold:0,75,HitsIterations:25,3/12/2007 6:39:37 לל
+TransactionCount:20993
+TransactionHitsCount:6092
+OneTransactionItemHitsCount:6085
+TwoTransactionItemHitsCount:7 
+ThreeTransactionItemHitsCount:0
+OverThreeTransactionItemHitsCount:0
+EndTime:4/12/2007 12:56:13 נל
+
+========50% of the Transaction for training=========
+Statistical Results: TranSetForTraining50perc.dat - Boolean50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,5,HitsIterations:25,25/11/2007 10:15:49 לל
+TransactionCount:13852
+TransactionHitsCount:7681
+OneTransactionItemHitsCount:5756
+TwoTransactionItemHitsCount:1432 
+ThreeTransactionItemHitsCount:365
+OverThreeTransactionItemHitsCount:128
+EndTime:25/11/2007 10:15:59 לל
+
+============HITS BASED - DISTANCE MODEL============
+
+========20% of the Transaction for training=========
+
+========50% of the Transaction for training=========
+
+---------------------------------------------------------------------------------------------------------------
+
+============MATRIX BASED - BOOLEAN MODEL============
+
+========20% of the Transaction for training=========
+Statistical Results: TranSetForTraining20perc.dat - Boolean20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,25,HitsIterations:25,2/12/2007 8:21:57 לל
+TransactionCount:20993
+TransactionHitsCount:12759
+OneTransactionItemHitsCount:8292
+TwoTransactionItemHitsCount:2898 
+ThreeTransactionItemHitsCount:1049
+OverThreeTransactionItemHitsCount:520
+EndTime:2/12/2007 8:22:11 לל
+
+Statistical Results: TranSetForTraining20perc.dat - Boolean20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,5,HitsIterations:25,2/12/2007 8:24:36 לל
+TransactionCount:20993
+TransactionHitsCount:11518
+OneTransactionItemHitsCount:9165
+TwoTransactionItemHitsCount:1781 
+ThreeTransactionItemHitsCount:418
+OverThreeTransactionItemHitsCount:154
+EndTime:2/12/2007 8:24:50 לל
+
+Statistical Results: TranSetForTraining20perc.dat - Boolean20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,75,HitsIterations:25,2/12/2007 8:25:49 לל
+TransactionCount:20993
+TransactionHitsCount:10066
+OneTransactionItemHitsCount:9685
+TwoTransactionItemHitsCount:333 
+ThreeTransactionItemHitsCount:42
+OverThreeTransactionItemHitsCount:6
+EndTime:2/12/2007 8:26:04 לל
+
+========50% of the Transaction for training=========
+Statistical Results: TranSetForTraining50perc.dat - Boolean50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,25,HitsIterations:25,2/12/2007 8:14:16 לל
+TransactionCount:13852
+TransactionHitsCount:8384
+OneTransactionItemHitsCount:5107
+TwoTransactionItemHitsCount:2053 
+ThreeTransactionItemHitsCount:817
+OverThreeTransactionItemHitsCount:407
+EndTime:2/12/2007 8:14:25 לל
+
+Statistical Results: TranSetForTraining50perc.dat - Boolean50percTrainingMatrix.dat
+Algorithm:HitsBased,SplitThreshold:0,5,HitsIterations:25,25/11/2007 10:24:20 לל
+TransactionCount:13852
+TransactionHitsCount:5315
+OneTransactionItemHitsCount:4812
+TwoTransactionItemHitsCount:472 
+ThreeTransactionItemHitsCount:27
+OverThreeTransactionItemHitsCount:4
+EndTime:26/11/2007 2:12:14 נל
+
+Statistical Results: TranSetForTraining50perc.dat - Boolean50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,75,HitsIterations:25,2/12/2007 8:15:32 לל
+TransactionCount:13852
+TransactionHitsCount:6695
+OneTransactionItemHitsCount:6365
+TwoTransactionItemHitsCount:276 
+ThreeTransactionItemHitsCount:49
+OverThreeTransactionItemHitsCount:5
+EndTime:2/12/2007 8:15:44 לל
+
+============MATRIX BASED - DISTANCE MODEL============
+
+========20% of the Transaction for training=========
+Statistical Results: TranSetForTraining20perc.dat - Distance20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,25,HitsIterations:25,2/12/2007 8:28:11 לל
+TransactionCount:20993
+TransactionHitsCount:12335
+OneTransactionItemHitsCount:8443
+TwoTransactionItemHitsCount:2685 
+ThreeTransactionItemHitsCount:942
+OverThreeTransactionItemHitsCount:265
+EndTime:2/12/2007 8:28:25 לל
+
+Statistical Results: TranSetForTraining20perc.dat - Distance20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,5,HitsIterations:25,2/12/2007 8:30:07 לל
+TransactionCount:20993
+TransactionHitsCount:10942
+OneTransactionItemHitsCount:9093
+TwoTransactionItemHitsCount:1565 
+ThreeTransactionItemHitsCount:245
+OverThreeTransactionItemHitsCount:39
+EndTime:2/12/2007 8:30:21 לל
+
+Statistical Results: TranSetForTraining20perc.dat - Distance20percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,75,HitsIterations:25,2/12/2007 8:31:25 לל
+TransactionCount:20993
+TransactionHitsCount:9679
+OneTransactionItemHitsCount:9467
+TwoTransactionItemHitsCount:203 
+ThreeTransactionItemHitsCount:8
+OverThreeTransactionItemHitsCount:1
+EndTime:2/12/2007 8:31:41 לל
+
+=========50%of the Transaction for training=========
+Statistical Results: TranSetForTraining50perc.dat - Distance50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,25,HitsIterations:25,2/12/2007 8:07:31 לל
+TransactionCount:13852
+TransactionHitsCount:8300
+OneTransactionItemHitsCount:5345
+TwoTransactionItemHitsCount:1935 
+ThreeTransactionItemHitsCount:781
+OverThreeTransactionItemHitsCount:239
+EndTime:2/12/2007 8:08:14 לל
+
+Statistical Results: TranSetForTraining50perc.dat - Distance50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,5,HitsIterations:25,2/12/2007 8:03:36 לל
+TransactionCount:13852
+TransactionHitsCount:7463
+OneTransactionItemHitsCount:5835
+TwoTransactionItemHitsCount:1338 
+ThreeTransactionItemHitsCount:252
+OverThreeTransactionItemHitsCount:38
+EndTime:2/12/2007 8:03:47 לל
+
+Statistical Results: TranSetForTraining50perc.dat - Distance50percTrainingMatrix.dat
+Algorithm:MatrixBased,SplitThreshold:0,75,HitsIterations:25,2/12/2007 8:09:15 לל
+TransactionCount:13852
+TransactionHitsCount:6587
+OneTransactionItemHitsCount:6379
+TwoTransactionItemHitsCount:191 
+ThreeTransactionItemHitsCount:16
+OverThreeTransactionItemHitsCount:1
+EndTime:2/12/2007 8:09:53 לל
